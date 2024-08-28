@@ -795,8 +795,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                                     InvocationTargetException {
         // Trace logging (if enabled)
         if (LOG.isTraceEnabled()) {
-            final StringBuilder sb = new StringBuilder("  setProperty(");
-            LOG.trace(traceLogRecord(bean, name, value, sb).toString());
+            final String logStart = "  setProperty(";
+            LOG.trace(traceLogRecord(bean, name, value, logStart).toString());
         }
 
         // Resolve any nested expression to get the actual target bean

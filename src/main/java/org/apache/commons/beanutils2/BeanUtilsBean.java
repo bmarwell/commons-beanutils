@@ -379,8 +379,8 @@ public class BeanUtilsBean {
         throws IllegalAccessException, InvocationTargetException {
         // Trace logging (if enabled)
         if (LOG.isTraceEnabled()) {
-            final StringBuilder sb = new StringBuilder("  copyProperty(");
-            LOG.trace(traceLogRecord(bean, name, value, sb).toString());
+            final String logStart = "  copyProperty(";
+            LOG.trace(traceLogRecord(bean, name, value, logStart).toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -888,8 +888,8 @@ public class BeanUtilsBean {
         throws IllegalAccessException, InvocationTargetException {
         // Trace logging (if enabled)
         if (LOG.isTraceEnabled()) {
-            final StringBuilder sb = new StringBuilder("  setProperty(");
-            LOG.trace(traceLogRecord(bean, name, value, sb).toString());
+            final String logStart = "  setProperty(";
+            LOG.trace(traceLogRecord(bean, name, value, logStart).toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -1035,10 +1035,11 @@ public class BeanUtilsBean {
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
-     * @param sb the start of stringBuilder
+     * @param logStart the start of log
      * @return the value should log as trace
      */
-    protected static StringBuilder traceLogRecord(Object bean, String name, Object value, StringBuilder sb) {
+    protected static StringBuilder traceLogRecord(Object bean, String name, Object value, final String logStart) {
+        StringBuilder sb = new StringBuilder(logStart);
         sb.append(bean);
         sb.append(", ");
         sb.append(name);
