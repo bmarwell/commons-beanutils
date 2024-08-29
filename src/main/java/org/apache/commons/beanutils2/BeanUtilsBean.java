@@ -60,7 +60,7 @@ public class BeanUtilsBean {
     /**
      * Logging for this instance
      */
-    private static final Log LOG = LogFactory.getLog(BeanUtilsBean.class);
+    private static Log LOG = LogFactory.getLog(BeanUtilsBean.class);
 
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
@@ -170,6 +170,12 @@ public class BeanUtilsBean {
                          final PropertyUtilsBean propertyUtilsBean) {
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
+    }
+
+    public BeanUtilsBean(final ConvertUtilsBean convertUtilsBean, final PropertyUtilsBean propertyUtilsBean, final Log log) {
+        this.convertUtilsBean = convertUtilsBean;
+        this.propertyUtilsBean = propertyUtilsBean;
+        LOG = log;
     }
 
     /**
