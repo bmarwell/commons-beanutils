@@ -1434,24 +1434,38 @@ public class BeanUtilsBeanTestCase extends TestCase {
 
     }
 
+    /**
+     * Test copying a new value to a write-only property by copy and set, using simpleLogging.
+     */
     public void testCopyPropertyLogTrace() throws Exception {
         LogSpy logSpy = new LogSpy(LogFactory.getLog(BeanUtilsBean.class));
         final BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new PropertyUtilsBean(), logSpy);
 
         beanUtils.copyProperty(bean, "writeOnlyProperty", "New value");
+        assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, New value)", logSpy.getTraceMessages().get(0));
 
+        beanUtils.setProperty(bean, "writeOnlyProperty", "New value");
         assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, New value)", logSpy.getTraceMessages().get(0));
     }
 
+    /**
+     * Test copying {@code NULL} value to a write-only property by copy and set, using simpleLogging.
+     */
     public void testCopyPropertyLogTraceWithNull() throws Exception {
         LogSpy logSpy = new LogSpy(LogFactory.getLog(BeanUtilsBean.class));
         final BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new PropertyUtilsBean(), logSpy);
 
         beanUtils.copyProperty(bean, "writeOnlyProperty", null);
+        assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, <NULL>)", logSpy.getTraceMessages().get(0));
 
+        beanUtils.setProperty(bean, "writeOnlyProperty", null);
         assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, <NULL>)", logSpy.getTraceMessages().get(0));
     }
 
+    /**
+     * Test copying a new value to a write-only property, when the bean's
+     * <strong>toString</strong> has been {@code @Override}, using simpleLogging.
+     */
     public void testCopyPropertyLogTraceWhenBeanOverRidesToString() throws Exception {
         final TestBean2 bean = new TestBean2();
 
@@ -1459,7 +1473,9 @@ public class BeanUtilsBeanTestCase extends TestCase {
         final BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new PropertyUtilsBean(), logSpy);
 
         beanUtils.copyProperty(bean, "writeOnlyProperty", "New value");
+        assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, has been set)", logSpy.getTraceMessages().get(0));
 
+        beanUtils.setProperty(bean, "writeOnlyProperty", "New value");
         assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, has been set)", logSpy.getTraceMessages().get(0));
     }
 

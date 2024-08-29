@@ -172,6 +172,16 @@ public class BeanUtilsBean {
         this.propertyUtilsBean = propertyUtilsBean;
     }
 
+    /**
+     * <p>Constructs an instance using given property, conversion instances and log for logging.</p>
+     *
+     * @param convertUtilsBean use this {@code ConvertUtilsBean}
+     * to perform conversions from one object to another
+     * @param propertyUtilsBean use this {@code PropertyUtilsBean}
+     * to access properties
+     * @param log use this {@code Log}
+     * to appoint logging
+     */
     public BeanUtilsBean(final ConvertUtilsBean convertUtilsBean, final PropertyUtilsBean propertyUtilsBean, final Log log) {
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
